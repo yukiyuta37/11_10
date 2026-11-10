@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#17121C">
+
+    <title>11:10 — A Special Day</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.185.0/build/three.module.js"
+        }
+    }
+    </script>
+</head>
+
+<body>
+
+    <!-- الصفحة الرئيسية -->
+    <main class="welcome" id="welcomeScreen">
+
+        <div class="stars"></div>
+
+        <p class="date">NOVEMBER 10</p>
+
+        <h1>
+            Something special<br>
+            is waiting for you.
+        </h1>
+
+        <p class="subtitle">
+            A little world, made just for you.
+        </p>
+
+        <button id="openButton">
+            Open your little world
+            <span>✦</span>
+        </button>
+
+        <p class="signature">11 · 10</p>
+
+    </main>
+
+
+    <!-- صفحة الانتظار -->
+    <main class="countdown-screen" id="countdownScreen" hidden>
+
+        <p class="date">A LITTLE MORE PATIENCE</p>
+
+        <h1>Not just yet...</h1>
+
+        <p class="subtitle">
+            Your little world is waiting to be unlocked.
+        </p>
+
+        <div id="countdown">
+            <span id="days">00</span> :
+            <span id="hours">00</span> :
+            <span id="minutes">00</span> :
+            <span id="seconds">00</span>
+        </div>
+
+        <p class="signature">11 · 10 · ✦</p>
+
+    </main>
+
+
+    <!-- شاشة المفاجأة -->
+    <main class="unlocked-screen" id="unlockedScreen" hidden>
+
+        <div class="birthday-decor" aria-hidden="true">
+
+            <span class="floating-star star-one">✦</span>
+            <span class="floating-star star-two">✧</span>
+            <span class="floating-star star-three">✦</span>
+
+            <div class="birthday-cake">
+
+                <div class="candle">
+                    <span class="flame"></span>
+                </div>
+
+                <div class="cake-top"></div>
+                <div class="cake-body"></div>
+                <div class="cake-plate"></div>
+
+            </div>
+
+        </div>
+
+        <p class="date">NOVEMBER 10 · 22:00</p>
+
+        <h1>The wait is over.</h1>
+
+        <p class="subtitle">
+            This little world was made just for you.
+        </p>
+
+        <button id="enterWorldButton">
+            Enter your world
+            <span>✦</span>
+        </button>
+
+        <p class="signature">A little surprise awaits...</p>
+
+    </main>
+
+
+    <!-- العالم الداخلي -->
+    <main class="world-screen" id="worldScreen" hidden>
+
+        <div class="world-decor" aria-hidden="true">
+
+            <span class="world-star star-a">✦</span>
+            <span class="world-star star-b">✧</span>
+            <span class="world-star star-c">✦</span>
+
+            <span class="world-glow glow-a"></span>
+            <span class="world-glow glow-b"></span>
+
+        </div>
+
+        <p class="date">A LITTLE WORLD FOR YOU</p>
+
+        <h1>Where our little story begins.</h1>
+
+        <p class="subtitle">
+            There is something waiting for you here.
+        </p>
+
+        <button id="openMessageButton">
+            Discover the letter
+            <span>✉</span>
+        </button>
+
+        <p class="signature">11 · 10 · ✦</p>
+
+    </main>
+
+
+    <!-- قسم الرسالة -->
+    <main class="message-screen" id="messageScreen" hidden>
+
+        <p class="date">A LITTLE SURPRISE</p>
+
+        <h1>A letter for you.</h1>
+
+        <div class="message-scene" id="messageScene">
+
+            <div class="envelope-stage" id="envelopeStage">
+
+                <div class="envelope" id="envelope">
+
+                    <div class="envelope-back"></div>
+
+                    <article class="letter-paper" id="letterPaper">
+
+                        <span class="flower-decor flower-bottom-left">✧</span>
+
+                        <div class="letter-content" id="letterContent"></div>
+
+                    </article>
+
+                    <div class="envelope-front"></div>
+                    <div class="envelope-flap"></div>
+
+                    <div class="wax-seal">🎂</div>
+
+                </div>
+
+
+                <div class="butterfly" id="butterfly">
+
+                    <svg viewBox="0 0 120 100" class="butterfly-art">
+
+                        <defs>
+                            <linearGradient id="wingColor" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#F8DCE5"/>
+                                <stop offset="55%" stop-color="#D9A9BB"/>
+                                <stop offset="100%" stop-color="#A97791"/>
+                            </linearGradient>
+                        </defs>
+
+                        <g class="wing-left">
+
+                            <path d="M57 45 C43 12 17 3 8 17 C-2 34 13 54 43 60 C48 56 53 50 57 45Z"
+                                  fill="url(#wingColor)" stroke="#A77A8D" stroke-width="1.2"/>
+
+                            <path d="M54 44 Q34 18 13 22 M51 49 Q29 38 14 39"
+                                  fill="none" stroke="#F9E6D2" stroke-width="1.3"/>
+
+                            <circle cx="24" cy="27" r="2" fill="#FFF0DC"/>
+                            <circle cx="36" cy="39" r="1.7" fill="#FFF0DC"/>
+
+                            <path d="M52 53 C31 48 17 61 24 79 C31 95 49 83 58 62Z"
+                                  fill="url(#wingColor)" stroke="#A77A8D" stroke-width="1.2"/>
+
+                            <path d="M52 59 Q35 63 29 77"
+                                  fill="none" stroke="#F9E6D2" stroke-width="1.3"/>
+
+                            <circle cx="39" cy="72" r="2" fill="#FFF0DC"/>
+
+                        </g>
+
+
+                        <g class="wing-right">
+
+                            <path d="M63 45 C77 12 103 3 112 17 C122 34 107 54 77 60 C72 56 67 50 63 45Z"
+                                  fill="url(#wingColor)" stroke="#A77A8D" stroke-width="1.2"/>
+
+                            <path d="M66 44 Q86 18 107 22 M69 49 Q91 38 106 39"
+                                  fill="none" stroke="#F9E6D2" stroke-width="1.3"/>
+
+                            <circle cx="96" cy="27" r="2" fill="#FFF0DC"/>
+                            <circle cx="84" cy="39" r="1.7" fill="#FFF0DC"/>
+
+                            <path d="M68 53 C89 48 103 61 96 79 C89 95 71 83 62 62Z"
+                                  fill="url(#wingColor)" stroke="#A77A8D" stroke-width="1.2"/>
+
+                            <path d="M68 59 Q85 63 91 77"
+                                  fill="none" stroke="#F9E6D2" stroke-width="1.3"/>
+
+                            <circle cx="81" cy="72" r="2" fill="#FFF0DC"/>
+
+                        </g>
+
+
+                        <path d="M60 38 Q56 55 60 72"
+                              fill="none" stroke="#79534D" stroke-width="3" stroke-linecap="round"/>
+
+                        <circle cx="60" cy="34" r="3.5" fill="#79534D"/>
+
+                        <g fill="none" stroke="#79534D" stroke-width="1.3" stroke-linecap="round">
+
+                            <path d="M59 33 Q48 17 43 20"/>
+                            <path d="M61 33 Q72 17 77 20"/>
+
+                        </g>
+
+                    </svg>
+
+                </div>
+
+
+                <p class="butterfly-hint" id="butterflyHint" hidden></p>
+
+                <button class="open-envelope" id="openEnvelopeButton">
+                    Open me ✉
+                </button>
+
+            </div>
+
+        </div>
+
+        <p class="signature">Made just for you · ✦</p>
+
+        <button class="memories-next" id="memoriesNextButton">
+            Discover our memories ✦
+        </button>
+
+    </main>
+
+
+    <!-- قسم الذكريات -->
+    <main class="memories-screen" id="memoriesScreen" hidden>
+
+        <div class="memories-intro" id="memoriesIntro">
+            <h1 id="memoriesTitle"></h1>
+        </div>
+
+
+        <div class="memory-board" id="memoryBoard">
+
+
+            <div class="photo-slot photo-slot-one">
+
+                <div class="photo-tape"></div>
+
+                <div class="memory-photo photo-one">
+
+                    <span class="photo-pin"></span>
+
+                    <div class="photo-frame">
+                        <img src="images/memory-1.jpg" alt="Memory one">
+                    </div>
+
+                    <p></p>
+
+                </div>
+
+            </div>
+
+
+            <div class="photo-slot photo-slot-two">
+
+                <div class="photo-tape"></div>
+
+                <div class="memory-photo photo-two">
+
+                    <span class="photo-pin"></span>
+
+                    <div class="photo-frame">
+                        <img src="images/memory-2.jpg" alt="Memory two">
+                    </div>
+
+                    <p></p>
+
+                </div>
+
+            </div>
+
+
+            <div class="photo-slot photo-slot-three">
+
+                <div class="photo-tape"></div>
+
+                <div class="memory-photo photo-three">
+
+                    <span class="photo-pin"></span>
+
+                    <div class="photo-frame">
+                        <img src="images/memory-3.jpg" alt="Memory three">
+                    </div>
+
+                    <p></p>
+
+                </div>
+
+            </div>
+
+
+            <div class="photo-slot photo-slot-four">
+
+                <div class="photo-tape"></div>
+
+                <div class="memory-photo photo-four">
+
+                    <span class="photo-pin"></span>
+
+                    <div class="photo-frame">
+                        <img src="images/memory-4.png" alt="Birthday memories">
+                    </div>
+
+                    <p></p>
+
+                </div>
+
+            </div>
+
+
+            <!-- القطة وفقاعة الكلام -->
+            <div class="cat-stage" id="catStage">
+
+                <div class="memory-cat" id="memoryCat">
+
+                    <img
+                        class="cat-pose cat-pose-walking"
+                        src="images/cat-walk.gif"
+                        alt="Cat walking"
+                    >
+
+                    <img
+                        class="cat-pose cat-pose-sitting"
+                        src="images/cat-sitting.png"
+                        alt="Cat sitting"
+                    >
+
+                </div>
+
+
+                <div class="cat-bubble" id="catBubble" hidden></div>
+
+            </div>
+
+
+            <!-- زر الانتقال إلى الأسئلة -->
+            <button class="memories-next questions-next" id="questionsNextButton">
+                A Few Questions ✦
+            </button>
+
+        </div>
+
+
+        <!-- عارض الصور -->
+        <div class="photo-view-backdrop" id="photoBackdrop">
+
+            <div class="photo-viewer" id="photoViewer">
+
+                <button
+                    class="photo-viewer-close"
+                    id="photoViewerClose"
+                    aria-label="Close"
+                >×</button>
+
+                <img
+                    id="photoViewerImage"
+                    src=""
+                    alt="Enlarged memory"
+                >
+
+                <p id="photoViewerCaption"></p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- قسم الأسئلة -->
+    <main class="questions-screen" id="questionsScreen" hidden>
+
+        <!-- عنوان القسم -->
+        <div class="questions-intro">
+
+            <h1 id="questionsTitle">A Few Little Questions ♡</h1>
+
+            <p>I've got a few things to ask you...</p>
+
+        </div>
+
+
+        <!-- نموذج الأسئلة -->
+        <form
+            class="questions-form"
+            id="questionsForm"
+            action="https://formspree.io/f/xdeevwjd"
+            method="POST"
+        >
+
+            <!-- حاوية الأسئلة -->
+            <div class="questions-container" id="questionsContainer">
+
+                <!-- السؤال الأول -->
+                <div class="question-card question-card-one">
+
+                    <span class="question-number">01</span>
+
+                    <h2>
+                        شو الأماكن اللي بدك تزوريها، سواء دول او مكان معين؟ وقوليهم كلهم.
+                    </h2>
+
+                    <textarea
+                        id="answerOne"
+                        name="places"
+                        placeholder="احكيلي عن كل الأماكن اللي ببالك..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- السؤال الثاني -->
+                <div class="question-card question-card-two">
+
+                    <span class="question-number">02</span>
+
+                    <h2>
+                        شو الشغلة اللي بدك أسويها لك، وتكون مخصصة لك انتي وبس؟
+                    </h2>
+
+                    <textarea
+                        id="answerTwo"
+                        name="special_request"
+                        placeholder="خليني أعرف..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- السؤال الثالث -->
+                <div class="question-card question-card-three">
+
+                    <span class="question-number">03</span>
+
+                    <h2>
+                        شو الأكلة اللي بدك تاكليها؟
+                    </h2>
+
+                    <textarea
+                        id="answerThree"
+                        name="food"
+                        placeholder="شو نفسك تاكلي؟"
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- السؤال الرابع -->
+                <div class="question-card question-card-four">
+
+                    <span class="question-number">04</span>
+
+                    <h2>
+                        برأيك يفندم ليمونه، مين هيفوز بمسابقة أكل؟
+                    </h2>
+
+                    <div class="food-options">
+
+                        <button
+                            type="button"
+                            class="food-option"
+                            data-choice="أنا"
+                        >
+                            أنا
+                        </button>
+
+                        <button
+                            type="button"
+                            class="food-option"
+                            data-choice="انتي"
+                        >
+                            انتي
+                        </button>
+
+                        <button
+                            type="button"
+                            class="food-option"
+                            data-choice="تعادل"
+                        >
+                            تعادل
+                        </button>
+
+                    </div>
+
+
+                    <input
+                        type="hidden"
+                        name="food_winner"
+                        id="foodChoice"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- تنبيه الخصوصية والموافقة -->
+            <div class="questions-consent" id="questionsConsent">
+
+                <p>
+                    ملاحظة صغيرة ♡
+                    إجاباتك على الأسئلة الأربعة هتوصلني حتى أقدر أشوفها،
+                    وراح تُرسل عبر خدمة خارجية.
+                    إرسالها اختياري، وبإمكانك عدم الإرسال إذا ما حبيتي.
+                </p>
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        id="answersConsent"
+                        required
+                    >
+
+                    موافقة على إرسال إجاباتي
+
+                </label>
+
+            </div>
+
+
+            <!-- رسالة حالة الإرسال -->
+            <p
+                class="questions-status"
+                id="questionsStatus"
+                role="status"
+                aria-live="polite"
+            ></p>
+
+
+            <!-- زر الإنهاء والإرسال -->
+            <button
+                type="submit"
+                class="questions-finish"
+                id="questionsFinishButton"
+            >
+                That's all! ✦
+            </button>
+
+        </form>
+
+
+        <!-- زر الانتقال إلى سيول -->
+        <button class="memories-next" id="visitSeoulButton" hidden>
+            Ready for a little adventure?
+            <span>✦</span>
+        </button>
+
+    </main>
+
+
+    <!-- شاشة الانتقال إلى سيول -->
+    <div class="seoul-transition" id="seoulTransition" hidden>
+
+        <p class="transition-label">SOMEWHERE IN SOUTH KOREA</p>
+
+        <h1>Our next stop...</h1>
+
+        <p>Seoul, South Korea ✦</p>
+
+    </div>
+
+
+    <!-- رحلة سيول -->
+    <main class="seoul-screen" id="seoulScreen" hidden>
+
+        <div id="seoulScene"></div>
+
+        <!-- زر الانتقال للنهاية -->
+        <button
+            id="seoulEndingButton"
+            class="seoul-ending-button"
+            hidden
+        >
+            One last little thing ✦
+        </button>
+
+    </main>
+
+
+    <!-- قسم النهاية -->
+    <main class="ending-screen" id="endingScreen" hidden>
+
+        <!-- السؤال الأخير -->
+        <div class="ending-content" id="endingQuestion">
+
+            <span class="ending-decoration">✦</span>
+
+            <p class="ending-label">A LITTLE SPACE FOR YOU</p>
+
+            <h1>سؤال أخير يا يوكي...</h1>
+
+            <p class="ending-subtitle">
+                هل في أي شيء حابة تقوليه مهما كان،
+                بس ما عرفتي كيف تقوليه؟
+            </p>
+
+            <p class="ending-note">
+                اكتبي اللي بدك إياه بكل راحتك.
+                إجابتك مش هتوصلني، ومش هتتبعت أو تتخزن بأي مكان.
+                المساحة دي إلك وحدك. ♡
+            </p>
+
+            <textarea
+                id="privateAnswer"
+                class="private-answer"
+                placeholder="اكتبي اللي في بالك..."
+                rows="4"
+            ></textarea>
+
+            <button id="showFinalMessage" class="ending-button">
+                One last message ✦
+            </button>
+
+        </div>
+
+
+        <!-- التهنئة الأخيرة -->
+        <div class="ending-content" id="finalBirthdayMessage" hidden>
+
+            <span class="ending-decoration">✦</span>
+
+            <p class="ending-label">A MESSAGE JUST FOR YOU</p>
+
+            <h1>Happy Birthday, Yuki!</h1>
+
+            <p class="final-greeting">
+                كل عام وانتي بخير، وكل عام يكون عندك إنجاز
+                أحسن وأفضل من اللي قبله.
+
+                انبسطي يوكي وافرحي، ولسه في اللي أحسن من هيك.
+
+                وكل عام وانتي بألف خير وصحة وسلامة،
+                يوكي الليمونه. ❤️
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <!-- ملفات JavaScript -->
+    <script src="js/script.js"></script>
+
+    <script type="module" src="seoul.js"></script>
+
+</body>
+</html>
