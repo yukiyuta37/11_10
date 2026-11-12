@@ -2,7 +2,7 @@
 // 1. إعدادات العد التنازلي
 // =========================
 
-const unlockDate = new Date("2026-11-11T00:50:00+02:00");
+const unlockDate = new Date("2026-11-13T01:00+02:00");
 
 
 // =========================
@@ -15,10 +15,12 @@ const unlockedScreen = document.getElementById("unlockedScreen");
 const worldScreen = document.getElementById("worldScreen");
 const messageScreen = document.getElementById("messageScreen");
 const memoriesScreen = document.getElementById("memoriesScreen");
+const apologyTransition = document.getElementById("apologyTransition");
+const apologyScreen = document.getElementById("apologyScreen");
 const questionsScreen = document.getElementById("questionsScreen");
 const seoulTransition = document.getElementById("seoulTransition");
 const seoulScreen = document.getElementById("seoulScreen");
-
+const birthdayMusic = document.getElementById("birthdayMusic");
 
 // =========================
 // 3. عناصر العد التنازلي
@@ -39,6 +41,8 @@ const enterWorldButton = document.getElementById("enterWorldButton");
 const openMessageButton = document.getElementById("openMessageButton");
 const memoriesNextButton = document.getElementById("memoriesNextButton");
 const questionsNextButton = document.getElementById("questionsNextButton");
+const apologyTransitionButton = document.getElementById("apologyTransitionButton");
+const apologyContinueButton = document.getElementById("apologyContinueButton");
 const visitSeoulButton = document.getElementById("visitSeoulButton");
 
 
@@ -58,19 +62,44 @@ const envelopeStage = document.getElementById("envelopeStage");
 // =========================
 
 openButton.addEventListener("click", function () {
-    welcomeScreen.hidden = true;
-    countdownScreen.hidden = false;
-});
 
+    birthdayMusic.volume = 0.5;
+    birthdayMusic.play().catch(error => console.log("Music playback failed:", error));
+
+    welcomeScreen.classList.add("screen-leaving");
+
+    setTimeout(function () {
+        welcomeScreen.hidden = true;
+        welcomeScreen.classList.remove("screen-leaving");
+
+        countdownScreen.hidden = false;
+        countdownScreen.classList.add("screen-entering");
+
+        requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+                countdownScreen.classList.remove("screen-entering");
+            });
+        });
+
+        updateCountdown();
+    }, 700);
+
+});
 
 // اختصار الاختبار T
 
 document.addEventListener("keydown", function (event) {
 
     if (event.key.toLowerCase() === "t") {
+
+        // إيقاف العد التنازلي أثناء الاختبار
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+
         welcomeScreen.hidden = true;
         countdownScreen.hidden = true;
         unlockedScreen.hidden = false;
+
     }
 
 });
@@ -93,16 +122,18 @@ openMessageButton.addEventListener("click", function () {
 
 });
 
-
 // =========================
 // 7. تحديث العد التنازلي
 // =========================
+
+let countdownInterval;
 
 function updateCountdown() {
 
     const now = new Date();
     const difference = unlockDate - now;
 
+    // إذا انتهى الموعد
     if (difference <= 0) {
 
         days.textContent = "00";
@@ -110,11 +141,33 @@ function updateCountdown() {
         minutes.textContent = "00";
         seconds.textContent = "00";
 
-        countdownScreen.hidden = true;
-        unlockedScreen.hidden = false;
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+
+        countdownScreen.classList.add("screen-leaving");
+
+        setTimeout(function () {
+
+            countdownScreen.hidden = true;
+            countdownScreen.classList.remove("screen-leaving");
+
+            unlockedScreen.hidden = false;
+            unlockedScreen.classList.add("screen-entering");
+
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    unlockedScreen.classList.remove("screen-entering");
+                });
+            });
+
+        }, 700);
 
         return;
     }
+
+    // إذا لم ينتهِ الموعد بعد
+    countdownScreen.hidden = false;
+    unlockedScreen.hidden = true;
 
     const totalSeconds = Math.floor(difference / 1000);
 
@@ -128,11 +181,12 @@ function updateCountdown() {
     minutes.textContent = String(m).padStart(2, "0");
     seconds.textContent = String(s).padStart(2, "0");
 
+    // تشغيل المؤقت إذا لم يكن يعمل
+    if (!countdownInterval) {
+        countdownInterval = setInterval(updateCountdown, 1000);
+    }
+
 }
-
-updateCountdown();
-setInterval(updateCountdown, 1000);
-
 
 // =========================
 // 8. حركة الفراشة
@@ -300,11 +354,53 @@ memoriesNextButton.addEventListener("click", function () {
 });
 
 
-// الانتقال من الذكريات إلى الأسئلة
+// الانتقال من الذكريات إلى مفاجأة الاعتذار
 
 questionsNextButton.addEventListener("click", function () {
 
     memoriesScreen.hidden = true;
+    apologyTransition.hidden = false;
+
+    requestAnimationFrame(function () {
+        apologyTransition.classList.add("transition-show");
+    });
+
+});
+
+
+// الانتقال من شاشة المفاجأة إلى رسالة الاعتذار
+
+apologyTransitionButton.addEventListener("click", function () {
+
+    if (apologyTransitionButton.disabled) return;
+
+    apologyTransitionButton.disabled = true;
+
+    apologyTransition.classList.add("transition-leave");
+
+    setTimeout(function () {
+
+        apologyTransition.hidden = true;
+
+        apologyTransition.classList.remove(
+            "transition-show",
+            "transition-leave"
+        );
+
+        apologyTransitionButton.disabled = false;
+
+        apologyScreen.hidden = false;
+
+    }, 1000);
+
+});
+
+
+// الانتقال من رسالة الاعتذار إلى الأسئلة
+
+apologyContinueButton.addEventListener("click", function () {
+
+    apologyScreen.hidden = true;
     questionsScreen.hidden = false;
 
 });
@@ -426,7 +522,27 @@ function startMemoryPhotos() {
 const photoViewerClose = document.getElementById("photoViewerClose");
 const photoBackdrop = document.getElementById("photoBackdrop");
 const photoViewer = document.getElementById("photoViewer");
+const photoViewerImage = document.getElementById("photoViewerImage");
+const photoViewerCaption = document.getElementById("photoViewerCaption");
 
+
+// فتح الصورة عند الضغط عليها
+
+document.querySelectorAll(".memory-photo img").forEach(function (img) {
+
+    img.addEventListener("click", function () {
+
+        photoViewerImage.src = img.src;
+        photoViewerCaption.textContent = img.alt;
+
+        photoBackdrop.classList.add("visible");
+
+    });
+
+});
+
+
+// إغلاق عارض الصور
 
 function closePhotoViewer() {
 
@@ -466,6 +582,8 @@ if (photoViewer) {
 }
 
 
+// الإغلاق بزر Escape
+
 document.addEventListener("keydown", function (event) {
 
     if (event.key === "Escape") {
@@ -473,7 +591,6 @@ document.addEventListener("keydown", function (event) {
     }
 
 });
-
 
 // =========================
 // 14. قسم الأسئلة
@@ -732,6 +849,8 @@ document.addEventListener("keydown", function (event) {
         "worldScreen",
         "messageScreen",
         "memoriesScreen",
+        "apologyTransition",
+        "apologyScreen",
         "questionsScreen",
         "seoulTransition",
         "seoulScreen"

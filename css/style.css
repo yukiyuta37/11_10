@@ -1632,6 +1632,11 @@ button span {
     color: white;
     font-size: 23px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    padding: 0;
 }
 
 /* زخارف خلفية القسم */
@@ -2640,4 +2645,207 @@ button span {
         padding: 8px 14px;
     }
 
+}
+
+/* =========================
+   قسم الاعتذار
+========================= */
+
+.apology-screen {
+    min-height: 100vh;
+    width: 100%;
+    padding: 55px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+
+    background:
+        radial-gradient(circle at 15% 20%, #48263C 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, #392039 0%, transparent 45%),
+        linear-gradient(145deg, #17121C, #251321, #11131F);
+}
+
+/* الورقة */
+
+.apology-paper {
+    position: relative;
+    width: min(620px, 92vw);
+    padding: 55px 45px;
+
+    background:
+        radial-gradient(circle at 10% 10%, rgba(201, 164, 126, 0.10), transparent 30%),
+        radial-gradient(circle at 90% 90%, rgba(201, 164, 126, 0.10), transparent 30%),
+        linear-gradient(145deg, #FFFCF5, #F5EBDD);
+
+    border: 1px solid #DCC8AE;
+    border-radius: 4px;
+
+    box-shadow:
+        0 18px 55px rgba(0, 0, 0, 0.3),
+        inset 0 0 30px rgba(201, 164, 126, 0.08);
+
+    text-align: center;
+    animation: apologyPaperAppear 1.2s ease both;
+}
+
+/* الإطار الداخلي */
+
+.apology-paper::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(177, 138, 96, 0.4);
+    pointer-events: none;
+}
+
+/* الزخرفة */
+
+.apology-decoration {
+    display: block;
+    margin-bottom: 20px;
+    color: #B18A60;
+    font-size: 25px;
+}
+
+/* العنوان */
+
+.apology-paper h1 {
+    margin-bottom: 30px;
+    color: #805B55;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(25px, 4vw, 34px);
+    font-weight: 400;
+    text-shadow: none;
+}
+
+/* الرسالة الإنجليزية */
+
+.apology-english {
+    max-width: 490px;
+    margin: 0 auto;
+
+    color: #755B54;
+    font-family: Georgia, serif;
+    font-size: 16px;
+    line-height: 2.1;
+    letter-spacing: 0.2px;
+}
+
+/* الفاصل */
+
+.apology-divider {
+    width: 65px;
+    height: 1px;
+    margin: 30px auto;
+    background: #C9A47E;
+    opacity: 0.75;
+}
+
+/* الترجمة العربية */
+
+.apology-arabic {
+    max-width: 490px;
+    margin: 0 auto;
+
+    color: #805B55;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 2.2;
+}
+
+/* زر المتابعة */
+
+.apology-continue-button {
+    margin: 0;
+    padding: 14px 35px;
+
+    background: linear-gradient(110deg, #805B55, #A87978);
+    border: 1px solid #D9B5A5;
+    color: #FFF9EC;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+/* ظهور الورقة */
+
+@keyframes apologyPaperAppear {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* =========================
+   قسم الاعتذار - الهاتف
+========================= */
+
+@media (max-width: 600px) {
+
+    .apology-screen {
+        padding: 35px 15px;
+        gap: 22px;
+    }
+
+    .apology-paper {
+        width: 100%;
+        padding: 45px 25px;
+    }
+
+    .apology-paper h1 {
+        font-size: 26px;
+        margin-bottom: 25px;
+    }
+
+    .apology-english {
+        font-size: 14px;
+        line-height: 2;
+    }
+
+    .apology-divider {
+        margin: 25px auto;
+    }
+
+    .apology-arabic {
+        font-size: 13px;
+        line-height: 2.1;
+    }
+
+    .apology-continue-button {
+        padding: 13px 30px;
+        font-size: 12px;
+    }
+}
+
+/* =========================
+   انتقال الشاشات العادية
+========================= */
+
+.welcome,
+.countdown-screen,
+.unlocked-screen,
+.world-screen,
+.message-screen,
+.memories-screen,
+.apology-screen,
+.questions-screen,
+.ending-screen {
+    transition: opacity 0.7s ease;
+}
+
+.screen-leaving {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+.screen-entering {
+    opacity: 0;
 }

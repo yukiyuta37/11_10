@@ -276,7 +276,6 @@
 
         <div class="memory-board" id="memoryBoard">
 
-
             <div class="photo-slot photo-slot-one">
 
                 <div class="photo-tape"></div>
@@ -286,7 +285,7 @@
                     <span class="photo-pin"></span>
 
                     <div class="photo-frame">
-                        <img src="images/memory-1.jpg" alt="Memory one">
+                        <img src="images/memory-1.jpg" alt="You'll succeed and achieve everything you wish for. ✨">
                     </div>
 
                     <p></p>
@@ -305,7 +304,7 @@
                     <span class="photo-pin"></span>
 
                     <div class="photo-frame">
-                        <img src="images/memory-2.jpg" alt="Memory two">
+                        <img src="images/memory-2.jpg" alt="The most beautiful person in the world. 🌷">
                     </div>
 
                     <p></p>
@@ -324,7 +323,7 @@
                     <span class="photo-pin"></span>
 
                     <div class="photo-frame">
-                        <img src="images/memory-3.jpg" alt="Memory three">
+                        <img src="images/memory-3.jpg" alt="The best and dearest person to me, Yuki. ♡">
                     </div>
 
                     <p></p>
@@ -343,7 +342,7 @@
                     <span class="photo-pin"></span>
 
                     <div class="photo-frame">
-                        <img src="images/memory-4.png" alt="Birthday memories">
+                        <img src="images/memory-4.png" alt="Happy Birthday, Yuki! 🎂💗">
                     </div>
 
                     <p></p>
@@ -412,10 +411,69 @@
     </main>
 
 
+    <!-- الفاصل قبل رسالة الاعتذار -->
+    <div class="seoul-transition apology-transition" id="apologyTransition" hidden>
+
+        <div class="transition-content">
+
+            <span class="transition-star">✦</span>
+
+            <p class="transition-label">A LITTLE PAUSE</p>
+
+            <h1>Before we continue...</h1>
+
+            <p class="transition-subtitle">
+                There's something I want you to see. ♡
+            </p>
+
+            <span class="transition-decoration">♡</span>
+
+            <button class="apology-transition-button" id="apologyTransitionButton">
+                Continue ✦
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- قسم الاعتذار -->
+    <main class="apology-screen" id="apologyScreen" hidden>
+
+        <article class="apology-paper">
+
+            <span class="apology-decoration">✦</span>
+
+            <h1>A little note for you</h1>
+
+            <p class="apology-english">
+                I'm sorry I couldn't give you your birthday gift
+                on your special day. I really wished I could.
+                I hope this little surprise makes you smile,
+                even if it's a little late. ♡
+            </p>
+
+            <div class="apology-divider"></div>
+
+            <p class="apology-arabic" dir="rtl">
+                آسف لأنني لم أتمكن من تقديم هديتك في يوم ميلادك.
+                كنت أتمنى حقًا أن أستطيع ذلك.
+                أتمنى أن تجعلك هذه المفاجأة الصغيرة تبتسمين،
+                حتى وإن جاءت متأخرة قليلًا. ♡
+            </p>
+
+        </article>
+
+        <button class="apology-continue-button" id="apologyContinueButton">
+            Continue ✦
+        </button>
+
+    </main>
+
+
     <!-- قسم الأسئلة -->
     <main class="questions-screen" id="questionsScreen" hidden>
 
-        <!-- عنوان القسم -->
         <div class="questions-intro">
 
             <h1 id="questionsTitle">A Few Little Questions ♡</h1>
@@ -433,10 +491,8 @@
             method="POST"
         >
 
-            <!-- حاوية الأسئلة -->
             <div class="questions-container" id="questionsContainer">
 
-                <!-- السؤال الأول -->
                 <div class="question-card question-card-one">
 
                     <span class="question-number">01</span>
@@ -455,7 +511,6 @@
                 </div>
 
 
-                <!-- السؤال الثاني -->
                 <div class="question-card question-card-two">
 
                     <span class="question-number">02</span>
@@ -474,7 +529,6 @@
                 </div>
 
 
-                <!-- السؤال الثالث -->
                 <div class="question-card question-card-three">
 
                     <span class="question-number">03</span>
@@ -493,7 +547,6 @@
                 </div>
 
 
-                <!-- السؤال الرابع -->
                 <div class="question-card question-card-four">
 
                     <span class="question-number">04</span>
@@ -615,7 +668,6 @@
 
         <div id="seoulScene"></div>
 
-        <!-- زر الانتقال للنهاية -->
         <button
             id="seoulEndingButton"
             class="seoul-ending-button"
@@ -630,7 +682,6 @@
     <!-- قسم النهاية -->
     <main class="ending-screen" id="endingScreen" hidden>
 
-        <!-- السؤال الأخير -->
         <div class="ending-content" id="endingQuestion">
 
             <span class="ending-decoration">✦</span>
@@ -688,10 +739,13 @@
     </main>
 
 
-    <!-- ملفات JavaScript -->
-    <script src="js/script.js"></script>
+   <!-- ملف الموسيقى -->
+   <audio id="birthdayMusic" src="audio/birthday.mp3" loop preload="auto"></audio>
 
-    <script type="module" src="seoul.js"></script>
+   <!-- ملفات JavaScript -->
+   <script src="js/script.js"></script>
+
+   <script type="module" src="seoul.js"></script>
 
 </body>
 </html>
